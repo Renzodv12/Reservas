@@ -1,0 +1,60 @@
+@startuml
+!define ENTITY(name,desc) class name as "desc" << (E,#FFAAAA) >>
+!define RELATIONSHIP(from,to,label,style) from style to : label
+
+' Entities
+ENTITY(USUARIOS, "USUARIOS")
+ENTITY(CANCHAS, "CANCHAS")
+ENTITY(DEPORTES, "DEPORTES")
+ENTITY(LOCALIDADES, "LOCALIDADES")
+ENTITY(RESERVAS, "RESERVAS")
+ENTITY(RECOMENDACIONES, "RECOMENDACIONES")
+
+' Relationships
+RELATIONSHIP(USUARIOS, RESERVAS, "realiza", "||--o{")
+RELATIONSHIP(USUARIOS, RECOMENDACIONES, "recibe", "||--o{")
+RELATIONSHIP(CANCHAS, RESERVAS, "tiene", "||--o{")
+RELATIONSHIP(DEPORTES, CANCHAS, "pertenece", "||--o{")
+RELATIONSHIP(LOCALIDADES, CANCHAS, "ubicada", "||--o{")
+
+' Attributes
+USUARIOS : +id : int <<PK>>
+USUARIOS : nombre : string
+USUARIOS : apellido : string
+USUARIOS : email : string
+USUARIOS : contraseña : string
+USUARIOS : fecha_registro : date
+USUARIOS : activo : bool
+
+CANCHAS : +id : int <<PK>>
+CANCHAS : nombre : string
+CANCHAS : capacidad : int
+CANCHAS : precio_por_hora : decimal
+CANCHAS : id_deporte : int <<FK>>
+CANCHAS : id_localidad : int <<FK>>
+
+DEPORTES : +id : int <<PK>>
+DEPORTES : nombre : string
+DEPORTES : descripcion : string
+
+LOCALIDADES : +id : int <<PK>>
+LOCALIDADES : nombre : string
+LOCALIDADES : direccion : string
+LOCALIDADES : codigo_postal : string
+
+RESERVAS : +id : int <<PK>>
+RESERVAS : id_usuario : int <<FK>>
+RESERVAS : id_cancha : int <<FK>>
+RESERVAS : fecha_hora_inicio : datetime
+RESERVAS : fecha_hora_fin : datetime
+RESERVAS : precio_total : decimal
+RESERVAS : estado : string
+
+RECOMENDACIONES : +id : int <<PK>>
+RECOMENDACIONES : id_usuario : int <<FK>>
+RECOMENDACIONES : id_cancha : int <<FK>>
+RECOMENDACIONES : tipo_recomendacion : string
+RECOMENDACIONES : prioridad : int
+RECOMENDACIONES : fecha_creacion : datetime
+
+@enduml

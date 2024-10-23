@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Calendar, Clock, MapPin, Search } from 'lucide-react';
 import { useState } from 'react';
 
-export function ReservaCanchasColorida() {
+export function ReservaCanchas() {
   const [localidad, setLocalidad] = useState('');
   const [deporte, setDeporte] = useState('');
   const [fecha, setFecha] = useState('');
